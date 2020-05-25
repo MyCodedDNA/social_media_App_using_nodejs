@@ -19,3 +19,7 @@ const schema=mongoose.Schema({
 {
     timestamp:true
 });
+
+const user=mongoose.model('social_media_app',schema);
+
+module.exports=user;

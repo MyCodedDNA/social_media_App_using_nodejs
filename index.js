@@ -5,6 +5,10 @@ const port=8000;
 const app=express();
 const layout=require("express-ejs-layouts");
 const router =require("./routes/home")
+// for settingup passport
+const passport =require("passport");
+const passportLocal=require("./config/passport_config");
+const session=require("express-session");
 
 // setting in app the view engine as ejs
 app.set("view engine","ejs");
@@ -12,6 +16,21 @@ app.set("views","views");
 // setting up layout 
 app.set("layout extractScripts",true);
 app.set("layout extractStyles",true);
+
+// settingup express-session
+app.use(session(
+{
+    name:"socialMedia",
+    secret:"socoalApp",
+    saveUninitialized:false,
+    resave:false,
+    cookie:{maxAge:(1000*60*100)}
+}
+));
+app.use(passport.initialize());
+app.use(passport.session());
+// fetching data from forms
+app.use(express.urlencoded());
 
 // using layout middleware
 app.use(layout);
