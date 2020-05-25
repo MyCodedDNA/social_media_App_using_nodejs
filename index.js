@@ -4,6 +4,7 @@ const cookie=require("cookie-parser");
 const port=8000;
 const app=express();
 const layout=require("express-ejs-layouts");
+const router =require("./routes/home")
 
 // setting in app the view engine as ejs
 app.set("view engine","ejs");
@@ -20,11 +21,9 @@ app.use(cookie());
 
 // setting directory for static files in middleware
 app.use(express.static("./assets"));
-app.get("/",function(req,res,next){
-    res.cookie("hi","yo");
-    res.render("home");
-});
 
+// using router to set controller
+app.use("/",router);
 // setting up server
 app.listen(port,function(err){
     if(err)
