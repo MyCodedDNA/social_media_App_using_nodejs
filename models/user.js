@@ -19,3 +19,6 @@ const schema=mongoose.Schema({
 {
     timestamp:true
 });
+const user=mongoose.model('userdb',schema);
+
+module.exports=user;

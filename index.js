@@ -13,6 +13,8 @@ app.set("views","views");
 app.set("layout extractScripts",true);
 app.set("layout extractStyles",true);
 
+// getting data back from form
+app.use(express.urlencoded());
 // using layout middleware
 app.use(layout);
 // using cookie-parser middleware
