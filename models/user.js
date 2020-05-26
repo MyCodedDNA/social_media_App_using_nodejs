@@ -2,8 +2,7 @@ const mongoose=require("mongoose");
 const schema=mongoose.Schema({
     name:{
         type:String,
-        required:true,
-        unique:true
+        required:true
     },
     email:{
         type:String,
@@ -12,14 +11,13 @@ const schema=mongoose.Schema({
     },
     password:{
         type:String,
-        required:true,
-        unique:true
+        required:true
     }
 },
 {
     timestamp:true
 });
 
-const user=mongoose.model('social_media_app',schema);
+const user=mongoose.model('user',schema);
 
 module.exports=user;

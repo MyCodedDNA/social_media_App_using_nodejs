@@ -34,22 +34,11 @@ module.exports.action_signout=function(req,res){
 }
 
 module.exports.action_comment=function(req,res){
-    req.body.id=req.user.id;
+    req.body.user_data=req.user._id;
     comments.create(req.body);
+    res.redirect('back');
     // console.log(req.body);
-    comments.find({},function(err,found){
-        if(err)
-        {
-            return console.log("error in finding comments in db");
-        }
-        if(!found)
-        {
-            return res.redirect("back");
-        }
-        res.locals.comments=found;
-        // console.log(found);
-        res.render("home");
-    });
+    
     
 
 }

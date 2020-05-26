@@ -4,9 +4,9 @@ const schema=mongoose.Schema({
         type:String,
         required:true
     },
-    id:{
+    user_data:{
         type:mongoose.Schema.Types.ObjectId,
-        required:true
+        ref:'user'
     }
 },{
     timestamp:true
