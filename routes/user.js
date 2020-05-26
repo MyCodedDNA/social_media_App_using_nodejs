@@ -10,6 +10,7 @@ router.post("/action_login",passport.authenticate(
 'local', { 
 failureRedirect: '/user/login'}),controller_user.action_login);
 router.get("/signup",controller_user.signup);
+router.get("/action_signout",controller_user.action_signout);
 router.post("/action_signup",controller_user.action_signup);
 
 

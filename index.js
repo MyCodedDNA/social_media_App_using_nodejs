@@ -9,6 +9,7 @@ const router =require("./routes/home")
 const passport =require("passport");
 const passportLocal=require("./config/passport_config");
 const session=require("express-session");
+const connectMongo=require("connect-mongo")(session);
 
 // setting in app the view engine as ejs
 app.set("view engine","ejs");
@@ -21,11 +22,25 @@ app.set("layout extractStyles",true);
 app.use(session(
 {
     name:"socialMedia",
-    secret:"socoalApp",
+    secret:"socialApp",
     saveUninitialized:false,
     resave:false,
-    cookie:{maxAge:(1000*60*100)}
+    cookie:{maxAge:(1000*60*100)},
+    store: new connectMongo(
+        {
+            mongooseConnection:db,
+            autoRemove:'disabled'
+        },
+        function(err)
+        {
+            if(err)
+            {
+                return console.log(err);
+            }
+            console.log("session is being stored");
+        })
 }
+
 ));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -45,7 +60,8 @@ app.use(express.static("./assets"));
 // sending user details to locals 
 app.use(
     function(req,res,next){
-        res.locals.user=req.user;
+        if(req.isAuthenticated())
+        {res.locals.user=req.user;}
         next();
     }
 );

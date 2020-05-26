@@ -26,3 +26,9 @@ module.exports.action_signup=function(req,res){
     res.render('login');
 
 }
+
+module.exports.action_signout=function(req,res){
+    req.logout();
+    res.render('login');
+
+}
