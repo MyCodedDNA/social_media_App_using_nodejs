@@ -3,4 +3,12 @@
     this is home page
 
 </div>
+<form action="/user/action_comment" method="POST">
+<textarea name="comment" id="" cols="30" rows="3">enter text</textarea>
+<input type="submit" value="post">
+</form>
+<%for(let i of locals.comments) {%>
+    <p><%= i.comment %></p><br>
+    <% }%>
+
 <a href="/user/action_signout">signout <%= locals.user.name %></a>

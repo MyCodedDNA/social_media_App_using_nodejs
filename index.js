@@ -10,6 +10,18 @@ const passport =require("passport");
 const passportLocal=require("./config/passport_config");
 const session=require("express-session");
 const connectMongo=require("connect-mongo")(session);
+const scss=require("node-sass-middleware");
+
+// using sass middleware
+app.use(scss({
+    src:"./assets/scss",
+    dest:"./assets/css",
+    debug:false,
+    outputStyle:'extended',
+    prefix:'/css'
+
+
+}));
 
 // setting in app the view engine as ejs
 app.set("view engine","ejs");
