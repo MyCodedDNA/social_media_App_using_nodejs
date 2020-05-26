@@ -1,3 +1,7 @@
 module.exports=function(req,res){
-res.render('home');
+    if(req.isAuthenticated())
+    {
+        return res.render("home");
+    }
+res.redirect('/user/login');
 }

@@ -11,11 +11,11 @@ function(email,password,done)
         if(err)
         {
             console.log("error in foundig user in passport");
-            done(err);
+            return done(err);
         }
         if(!found_user||password!=found_user.password)
         {
-            done(null,false);
+            return done(null,false);
         }       
         done(null,found_user);
     });

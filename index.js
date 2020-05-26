@@ -41,6 +41,15 @@ app.use(cookie());
 // setting directory for static files in middleware
 app.use(express.static("./assets"));
 
+
+// sending user details to locals 
+app.use(
+    function(req,res,next){
+        res.locals.user=req.user;
+        next();
+    }
+);
+
 // using router to set controller
 app.use("/",router);
 // setting up server

@@ -1,16 +1,23 @@
 const user=require("../models/user");
 
 module.exports.login=function(req,res){
+    if(req.isAuthenticated())
+    {
+        return res.redirect("/");
+    }
     res.render('login');
 
 }
 module.exports.action_login=function(req,res){
-    
+
     res.redirect('/');
 
 }
 module.exports.signup=function(req,res){
-    
+    if(req.isAuthenticated())
+    {
+        return res.render("home");
+    }
     res.render('signup');
 
 }
