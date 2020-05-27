@@ -11,13 +11,17 @@
     <% for(let i of locals.posts) {%>
     <p><%= i.post %></p>
     <p><%= i.user_data.name %></p><br>
-    
+    <%if(locals.user.id==i.user_data.id){%>
+        <a href="/user/action_delete_post/<%= i.id %>">x</a>
+        <%}%>
     
     <% if(i.comments) {%>
         <% for(let j of i.comments) {%>
         <p><%= j.comment %></p>
         <p><%= j.user_data.name %></p><br>
-        
+            <%if(locals.user.id==j.user_data.id){%>
+            <a href="/user/action_delete_comment/<%= j.id %>">x</a>
+            <%}%>
         <% }%>
     <% } %>
        

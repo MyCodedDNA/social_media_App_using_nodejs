@@ -75,3 +75,44 @@ module.exports.action_comment=function(req,res){
     
 }
 
+module.exports.action_delete_comment=function(req,res)
+{
+    comments.findById(req.params.id,function(err,found_comment){
+        if(err)
+        {
+            return console.log("error in fiding post");
+        }
+        if(found_comment.user_data==req.user.id)
+        {
+            let postid=found_comment.post_data;
+            found_comment.delete();
+            posts.findByIdAndUpdate(postid,{$pull:{comments:req.params.id}},function(err,post)
+            {
+                return res.redirect("back");
+            });
+            
+
+        }
+        else
+        {return res.redirect("back");}
+    });
+
+}
+
+module.exports.action_delete_post=function(req,res)
+{
+    
+        posts.findById(req.params.id,function(err,found_post){
+            if(err)
+            {
+                return console.log("error in fiding post");
+            }
+            if(found_post.user_data==req.user.id)
+            {
+                found_post.delete();
+            }
+            return res.redirect("back");
+        });
+    
+}
+
