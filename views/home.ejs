@@ -3,15 +3,30 @@
     this is home page
 
 </div>
-<form action="/user/action_comment" method="POST">
-<textarea name="comment" id="" cols="30" rows="3">enter text</textarea>
+<form action="/user/action_post" method="POST">
+<textarea name="post" id="" cols="30" rows="3" placeholder="enter text"></textarea>
 <input type="submit" value="post">
 </form>
-<%if(locals.comments) {%>
-    <%for(let i of locals.comments) {%>
-        <p><%= i.comment %></p>
-        <p><%= i.user_data.name %></p><br>
+<% if(locals.posts) {%>
+    <% for(let i of locals.posts) {%>
+    <p><%= i.post %></p>
+    <p><%= i.user_data.name %></p><br>
+    
+    
+    <% if(i.comments) {%>
+        <% for(let j of i.comments) {%>
+        <p><%= j.comment %></p>
+        <p><%= j.user_data.name %></p><br>
+        
         <% }%>
+    <% } %>
+       
+    <form action="/user/action_comment" method="POST">
+        <textarea name="comment" id="" cols="30" rows="1" placeholder="enter text"></textarea>
+        <input type="hidden" name="post_data" value="<%=i._id%>">
+        <input type="submit" value="post">
+        </form>
     <% }%>
+<% } %>
 
 <a href="/user/action_signout">signout <%= locals.user.name %></a>

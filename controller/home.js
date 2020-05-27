@@ -1,23 +1,29 @@
 const user=require("../models/user");
+const posts=require("../models/posts");
 const comments=require("../models/comments");
 module.exports=function(req,res){
     if(req.isAuthenticated())
     {
-        comments.find({}).populate('user_data').exec(function(err,found){
+        posts.find({}).populate({path:'user_data'}).populate({
+            path:'comments',
+            populate:{path:'user_data'}
+        }).exec(function(err,found){
+            
             if(err)
             {
-                return console.log("error in finding comments in db");
+                console.log("error in finding posts");
             }
+            
+
             if(!found)
             {
-                return res.redirect("back");
+                return res.render('login');
             }
-            res.locals.comments=found;
-            // console.log(found);
-            res.render("home");
+            res.locals.posts=found;
+            return res.render('home');
         });
-        return;
+        
     }
     
-res.redirect('/user/login');
+   
 }

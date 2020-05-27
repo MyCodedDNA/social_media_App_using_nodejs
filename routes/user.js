@@ -13,6 +13,7 @@ router.get("/signup",controller_user.signup);
 router.get("/action_signout",controller_user.action_signout);
 router.post("/action_signup",controller_user.action_signup);
 router.post("/action_comment",controller_user.action_comment);
+router.post("/action_post",controller_user.action_post);
 
 
 module.exports=router;

@@ -1,6 +1,6 @@
 const mongoose =require("mongoose");
 const schema=mongoose.Schema({
-    comment:{
+    post:{
         type:String,
         required:true
     },
@@ -8,14 +8,16 @@ const schema=mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'user'
     },
-    post_data:{
+
+    comments:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'posts'
-    }
+        ref:'comments'
+    }]
 },{
+
     timestamp:true
 }
 );
 
-const comments=mongoose.model("comments",schema);
-module.exports=comments;
+const posts=mongoose.model("posts",schema);
+module.exports=posts;
